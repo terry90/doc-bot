@@ -53,7 +53,7 @@ end
 
 Thread.new do
   loop do
-    stime = Random.rand(5000)
+    stime = Random.rand(5000) + 3600
     puts "Next message in #{stime / 60} minutes"
     sleep stime
     sa_send(channel: '#random', text: Wording::OBEY.sample)

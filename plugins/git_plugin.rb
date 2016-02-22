@@ -37,6 +37,7 @@ class GitPlugin < DocBotPlugin
       return true
     else
       if @commit != `git log -1 --pretty=%B`
+        set_commit
         @msg = msg_commit
         return true
       end
