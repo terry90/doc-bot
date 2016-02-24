@@ -23,6 +23,7 @@ class Wording
   ]
 
   OBEY = [
+    'Écrivez moi ce dont vous avez besoin, je vous expliquerai comment vous en passer',
     'Je suis une vraie personne, aimez-moi.',
     'Conçu avec amour le 10/02/2016',
     'Bonsoir, je suis votre maître.',
