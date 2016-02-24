@@ -21,9 +21,43 @@ class DocBotPlugin
         block.call(member)
       end
     end
-    
-    def ready
-      false
+
+    def each_cyclable(&block)
+      registry.select { |plugin| plugin.cyclable? }.each do |member|
+        block.call(member)
+      end
     end
+
+    def each_matchable(&block)
+      registry.select { |plugin| plugin.matchable? }.each do |member|
+        block.call(member)
+      end
+    end
+  end
+
+  def ready # To be overriden in plugins
+    false
+  end
+
+  def msg(opts = {}) # To be overriden in plugins
+    nil
+  end
+
+  def cyclable?
+    false
+  end
+
+  def matchable?
+    true
+  end
+end
+
+module Cyclable # To be included in cyclable plugins (plugins needing to be runned each x seconds)
+  def cyclable?
+    true
+  end
+
+  def matchable?
+    false
   end
 end

@@ -8,6 +8,8 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
+    domain_name (0.5.25)
+      unf (>= 0.0.5, < 1.0.0)
     dotenv (2.1.0)
     eventmachine (1.0.9.1)
     faraday (0.9.2)
@@ -28,13 +30,21 @@ GEM
       launchy (~> 2.4)
     gli (2.13.4)
     hashie (3.4.3)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     i18n (0.7.0)
     json (1.8.3)
     launchy (2.4.3)
       addressable (~> 2.3)
+    mime-types (2.99)
     minitest (5.8.4)
     multipart-post (2.0.0)
+    netrc (0.11.0)
     oj (2.14.4)
+    rest-client (1.8.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     slack-ruby-bot (0.6.2)
       activesupport
       faye-websocket
@@ -48,9 +58,15 @@ GEM
       hashie
       json
       websocket-driver
+    social_shares (0.2.7)
+      json
+      rest-client
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.1)
     websocket-driver (0.6.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -61,6 +77,7 @@ PLATFORMS
 DEPENDENCIES
   dotenv
   slack-ruby-bot
+  social_shares
 
 BUNDLED WITH
    1.11.2

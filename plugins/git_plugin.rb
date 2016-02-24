@@ -1,5 +1,7 @@
 class GitPlugin < DocBotPlugin
   attr_reader :msg
+
+  include Cyclable
   
   def initialize
     set_commit

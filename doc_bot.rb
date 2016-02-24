@@ -19,6 +19,8 @@ def sa_send(opts)
 end
 
 class DocBot < SlackRubyBot::Bot
+  # Examples of match BEGIN ---------- (To be converted in plugin)
+
   match(/^wake up idiot$/i) do |client, data, match|
     client.web_client.chat_postMessage(
       channel: data.channel,
@@ -49,12 +51,18 @@ class DocBot < SlackRubyBot::Bot
     client.say(text: Wording::COOL.sample, channel: data.channel)
   end
 
+  # Examples of match END ------------
+
+  # Plugins queried when someone sends a msg
+
   match(/.*/) do |client, data, match|
     DocBotPlugin.each_matchable do |plugin|
-      sa_send(channel: '#test', text: plugin.msg) if plugin.ready
+      sa_send(channel: data.channel, text: plugin.msg({data: data, client: client})) if plugin.ready
     end
   end
 end
+
+# To be converted in plugin --------
 
 Thread.new do
   loop do
@@ -65,10 +73,14 @@ Thread.new do
   end
 end
 
+# END ------------------------------
+
+# Plugins queried each x seconds
+
 Thread.new do
   loop do
     DocBotPlugin.each_cyclable do |plugin|
-      sa_send(channel: '#test', text: plugin.msg) if plugin.ready
+      sa_send(channel: '#tech', text: plugin.msg) if plugin.ready
     end
     sleep 5
   end
