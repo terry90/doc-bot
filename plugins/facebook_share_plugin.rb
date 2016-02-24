@@ -18,7 +18,7 @@ class FacebookSharePlugin < DocBotPlugin
     urls.each do |url|
       shares << get_share(url)
     end
-    shares.join(', ')
+    "Nombre(s) de partages: #{shares.join(', ')}"
   end
 
   def my_turn?(m)
