@@ -4,7 +4,6 @@
 require 'slack-ruby-bot'
 require_relative 'wording.rb'
 require 'dotenv'
-require 'whenever'
 require_relative 'doc_bot_plugin.rb'
 Dir["plugins/*.rb"].each {|file| require File.join(File.dirname(__FILE__), file) }
 
@@ -49,6 +48,12 @@ class DocBot < SlackRubyBot::Bot
   match(/cool/i) do |client, data, match|
     client.say(text: Wording::COOL.sample, channel: data.channel)
   end
+
+  match(/.*/) do |client, data, match|
+    DocBotPlugin.each_matchable do |plugin|
+      sa_send(channel: '#test', text: plugin.msg) if plugin.ready
+    end
+  end
 end
 
 Thread.new do
@@ -62,8 +67,8 @@ end
 
 Thread.new do
   loop do
-    DocBotPlugin.each do |plugin|
-      sa_send(channel: '#tech', text: plugin.msg) if plugin.ready
+    DocBotPlugin.each_cyclable do |plugin|
+      sa_send(channel: '#test', text: plugin.msg) if plugin.ready
     end
     sleep 5
   end
