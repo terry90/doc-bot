@@ -80,7 +80,7 @@ end
 Thread.new do
   loop do
     DocBotPlugin.each_cyclable do |plugin|
-      sa_send(channel: '#tech', text: plugin.msg) if plugin.ready
+      sa_send(channel: plugin.channel || '#tech', text: plugin.msg) if plugin.ready
     end
     sleep 5
   end
