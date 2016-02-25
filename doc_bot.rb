@@ -57,7 +57,8 @@ class DocBot < SlackRubyBot::Bot
 
   match(/.*/) do |client, data, match|
     DocBotPlugin.each_matchable do |plugin|
-      sa_send(channel: data.channel, text: plugin.msg({data: data, client: client})) if plugin.ready
+      msg = plugin.msg({data: data, client: client})
+      sa_send(channel: data.channel, text: msg) if plugin.ready && !msg.blank?
     end
   end
 end
