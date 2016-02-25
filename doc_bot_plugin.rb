@@ -1,6 +1,8 @@
 # coding: utf-8
 
 class DocBotPlugin
+  attr_reader :channel
+
   class << self
     def inherited(base)
       registry << base.new
@@ -33,6 +35,10 @@ class DocBotPlugin
         block.call(member)
       end
     end
+  end
+
+  def initialize
+    @channel = '#tech'
   end
 
   def ready # To be overriden in plugins
