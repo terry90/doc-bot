@@ -21,22 +21,8 @@ end
 class DocBot < SlackRubyBot::Bot
   # Examples of match BEGIN ---------- (To be converted in plugin)
 
-  match(/^wake up idiot$/i) do |client, data, match|
-    client.web_client.chat_postMessage(
-      channel: data.channel,
-      as_user: true,
-      text: Wording::URGENT.sample,
-    )
-    
-    exec './urgent.sh'
-  end
-
   match(/^j'adore le foie gras et les papillons morts$/i) do |client, data, match|
     client.say(text: 'Demande a Terry ! Il est sympa :)', channel: data.channel)
-  end
-
-  match(/chat/i) do |client, data, match|
-    client.say(channel: data.channel, text: "Chat ! CHAAAAT", gif: 'lolcat')
   end
   
   match(/yolo/i) do |client, data, match|
@@ -86,5 +72,7 @@ Thread.new do
     sleep 5
   end
 end
+
+sa_send(channel: '#tech',text: "Hello world. My master is #{ENV.fetch('NAME')}. I am starting @ #{Time.now.strftime('%H:%M:%S')}")
 
 DocBot.run
