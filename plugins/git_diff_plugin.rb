@@ -8,7 +8,7 @@ class GitDiffPlugin < DocBotPlugin
   end
 
   def my_turn?(m)
-    message == "diff of #{ENV.fetch('NAME')} pls"
+    m == "diff of #{ENV.fetch('NAME')} pls"
   end
   
   def ready
