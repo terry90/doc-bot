@@ -10,11 +10,11 @@ class GitPlugin < DocBotPlugin
   end
   
   def msg_commit
-    "Doc just committed some changes: #{@commit}\n"
+    "#{ENV.fetch('NAME')} just committed some changes: #{@commit}\n"
   end
 
   def msg_branch
-    "Doc is currently working on the #{@branch} branch\n"
+    "#{ENV.fetch('NAME')} is currently working on the #{@branch} branch\n"
   end
 
   def set_commit
