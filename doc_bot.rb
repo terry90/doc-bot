@@ -22,7 +22,7 @@ class DocBot < SlackRubyBot::Bot
   # Examples of match BEGIN ---------- (To be converted in plugin)
 
   match(/^j'adore le foie gras et les papillons morts$/i) do |client, data, match|
-    client.say(text: 'Demande a Terry ! Il est sympa :)', channel: data.channel)
+    client.say(text: "Demande a #{ENV.fetch('NAME')} ! Il est sympa :)", channel: data.channel)
   end
   
   match(/yolo/i) do |client, data, match|
