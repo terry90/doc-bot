@@ -4,7 +4,7 @@ class GitDiffPlugin < DocBotPlugin
 
     my_turn?(message) or return nil
 
-    `git diff HEAD~`
+    `git diff HEAD~ HEAD`
   end
 
   def my_turn?(m)
