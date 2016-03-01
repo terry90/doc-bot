@@ -49,8 +49,6 @@ class DocBot < SlackRubyBot::Bot
   end
 end
 
-DocBot.run
-
 # To be converted in plugin --------
 
 Thread.new do
@@ -75,5 +73,11 @@ Thread.new do
   end
 end
 
-sa_send(channel: '#tech',text: "Hello world. My master is #{ENV.fetch('NAME')}. I am starting @ #{Time.now.strftime('%H:%M:%S')}")
+Thread.new do
+  sleep 5
+  hello = "Hello world. My master is #{ENV.fetch('NAME')}. I am starting @ #{Time.now.strftime('%H:%M:%S')}"
+  sa_send(channel: '#tech', text: hello)
+end
+
+DocBot.run
 

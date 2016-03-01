@@ -38,7 +38,7 @@ class GitPlugin < DocBotPlugin
       @msg = msg_branch
       return true
     else
-      if @commit != `git log -1 --pretty=%B`
+      if @commit != `git log -1 --pretty=%B` && Time.now.to_i - `git log -1 --pretty=%at`.to_i < 10
         set_commit
         @msg = msg_commit
         return true
