@@ -19,6 +19,7 @@ class GitPlugin < DocBotPlugin
 
   def set_commit
     tmp_commit = `git log -1 --pretty=%B`
+    return false if @commit == tmp_commit
     @commit = tmp_commit and return true unless /^Merge branch/ === tmp_commit || Time.now.to_i - `git log -1 --pretty=%at`.to_i >= 10
     false
   end
