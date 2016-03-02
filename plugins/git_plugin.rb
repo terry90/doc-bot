@@ -18,8 +18,9 @@ class GitPlugin < DocBotPlugin
   end
 
   def set_commit
-    @commit = `git log -1 --pretty=%B`
-    true
+    tmp_commit = `git log -1 --pretty=%B`
+    @commit = tmp_commit and return true unless /^Merge branch/ === tmp_commit || Time.now.to_i - `git log -1 --pretty=%at`.to_i < 10
+    false
   end
   
   def set_branch
@@ -38,8 +39,7 @@ class GitPlugin < DocBotPlugin
       @msg = msg_branch
       return true
     else
-      if @commit != `git log -1 --pretty=%B` && Time.now.to_i - `git log -1 --pretty=%at`.to_i < 10
-        set_commit
+      if set_commit
         @msg = msg_commit
         return true
       end
