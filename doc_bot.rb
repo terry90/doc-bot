@@ -42,9 +42,11 @@ class DocBot < SlackRubyBot::Bot
   # Plugins queried when someone sends a msg
 
   match(/.*/) do |client, data, match|
-    DocBotPlugin.each_matchable do |plugin|
-      msg = plugin.msg({data: data, client: client})
-      sa_send(channel: data.channel, text: msg) if plugin.ready && !msg.blank?
+    Dir.chdir ENV.fetch('APP_PATH') do
+      DocBotPlugin.each_matchable do |plugin|
+        msg = plugin.msg({data: data, client: client})
+        sa_send(channel: data.channel, text: msg) if plugin.ready && !msg.blank?
+      end
     end
   end
 end
@@ -66,12 +68,16 @@ end
 
 Thread.new do
   loop do
-    DocBotPlugin.each_cyclable do |plugin|
-      sa_send(channel: plugin.channel || '#tech', text: plugin.msg) if plugin.ready
+    Dir.chdir ENV.fetch('APP_PATH') do
+      DocBotPlugin.each_cyclable do |plugin|
+        sa_send(channel: plugin.channel || '#tech', text: plugin.msg) if plugin.ready
+      end
     end
     sleep 5
   end
 end
+
+# HELLO text, can be converted in plugin
 
 Thread.new do
   sleep 5
