@@ -22,11 +22,7 @@ class CoveragePlugin < DocBotPlugin
       msg = "Nouveau coverage: #{@coverage.to_f.round(2)}%. A augmenté de #{(@coverage.to_f - @last_coverage.to_f).round(2)}% ! Bien joué ;)"  
     end
     @last_coverage = @coverage
-    msg
-  end
-
-  def channel
-    '#test'
+    "#{msg} (#{ENV.fetch('NAME')})"
   end
   
   def ready
