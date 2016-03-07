@@ -1,4 +1,6 @@
 # coding: utf-8
+require 'json'
+
 class CoveragePlugin < DocBotPlugin
   include Cyclable
 
@@ -12,6 +14,15 @@ class CoveragePlugin < DocBotPlugin
   def set_coverage
     @coverage = `cat coverage/raw_coverage`
     @last_coverage = @coverage if @last_coverage.to_f == 0
+  end
+
+  def check_fail
+    Dir[("coverage/summary*.json")].each do |fn|
+      summary = File.read fn
+      json = JSON.parse(summary)
+      return true if json['summary']['failure_count'] != 0
+    end
+    false
   end
   
   def msg(opts = {})
@@ -27,6 +38,6 @@ class CoveragePlugin < DocBotPlugin
   
   def ready
     set_coverage
-    @coverage != @last_coverage
+    @coverage != @last_coverage && !check_fail
   end
 end
