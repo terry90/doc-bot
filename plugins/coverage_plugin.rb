@@ -19,8 +19,12 @@ class CoveragePlugin < DocBotPlugin
   def check_fail
     Dir[("coverage/summary*.json")].each do |fn|
       summary = File.read fn
-      json = JSON.parse(summary)
-      return true if json['summary']['failure_count'] != 0
+      begin
+        json = JSON.parse(summary)
+        return true if json['summary']['failure_count'] != 0
+      rescue
+        return true
+      end
     end
     false
   end

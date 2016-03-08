@@ -6,7 +6,7 @@ require_relative 'wording.rb'
 require 'dotenv'
 require_relative 'doc_bot_plugin.rb'
 Dir["plugins/*.rb"].each {|file| require File.join(File.dirname(__FILE__), file) }
-
+Thread.abort_on_exception = true
 Dotenv.load
 
 puts "Registered plugins: #{DocBotPlugin.each_c(&:to_s).join(', ')}"
