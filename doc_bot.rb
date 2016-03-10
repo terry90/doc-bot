@@ -26,7 +26,7 @@ class DocBot < SlackRubyBot::Bot
   end
 
   match(/happiness/i) do |client, data, match|
-    client.say(channel: data.channel, text: "Chat ! CHAAAAT", gif: Wording::HAPPINESS.sample)
+    client.say(channel: data.channel, text: "Take this, some happiness for you", gif: Wording::HAPPINESS.sample)
   end
   
   match(/yolo/i) do |client, data, match|
