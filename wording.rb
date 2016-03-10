@@ -1,5 +1,14 @@
 # coding: utf-8
 class Wording
+  HAPPINESS = [
+    'lolcat',
+    'unicorn',
+    'otter',
+    'happiness',
+    'love',
+    'panda',
+  ]
+
   COOL = [
     'GRAVE ! COOL. Aller, macdo',
     'Coolcool',
@@ -17,5 +26,5 @@ class Wording
     'Vous pouvez mute les notifications spécifiques à un canal',
     'Je ne suis qu\'amour',
     'Pour avoir une liste des commandes disponibles, tapez "j\'adore le foie gras et les papillons morts"',
-  ]
+  ] # Unused
 end

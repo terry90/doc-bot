@@ -24,6 +24,10 @@ class DocBot < SlackRubyBot::Bot
   match(/^j'adore le foie gras et les papillons morts$/i) do |client, data, match|
     client.say(text: "Demande a #{ENV.fetch('NAME')} ! Il est sympa :)", channel: data.channel)
   end
+
+  match(/happiness/i) do |client, data, match|
+    client.say(channel: data.channel, text: "Chat ! CHAAAAT", gif: Wording::HAPPINESS.sample)
+  end
   
   match(/yolo/i) do |client, data, match|
     client.say(text: 'swag', channel: data.channel)
@@ -50,19 +54,6 @@ class DocBot < SlackRubyBot::Bot
     end
   end
 end
-
-# To be converted in plugin --------
-
-Thread.new do
-  loop do
-    stime = Random.rand(5000) + 3600
-    puts "Next message in #{stime / 60} minutes"
-    sleep stime
-    sa_send(channel: '#random', text: Wording::OBEY.sample)
-  end
-end
-
-# END ------------------------------
 
 # Plugins queried each x seconds
 
